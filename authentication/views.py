@@ -24,6 +24,11 @@ def signup(request):
         my_user.last_name=lastname
         my_user.save()
         messages.success(request,"YOUR ACCOUNT AS CREATED SUCCESSFULLY!!")
+
+        #welcome email
+
+        
+
         return redirect('login')
 
     return render(request,'SignUp/signup.html')
