@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render,HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login as auth_login,logout
 
@@ -15,13 +15,16 @@ def signup(request):
       username=request.POST['username']  
       password=request.POST['password']  
       confirmpassword=request.POST['confirmpassword']  
-      my_user=User.objects.create_user(username,email,password)
-      my_user.first_name=firstname
-      my_user.last_name=lastname
-      my_user.save()
-      
-      messages.success(request,"YOUR ACCOUNT AS CRREATED SUCESSFULLY!!")
-      return redirect('login')
+
+      if password!=confirmpassword:
+          return HttpResponse("Your Password And Confirm password Are Not Equal")
+      else:
+        my_user=User.objects.create_user(username,email,password)
+        my_user.first_name=firstname
+        my_user.last_name=lastname
+        my_user.save()
+        messages.success(request,"YOUR ACCOUNT AS CREATED SUCCESSFULLY!!")
+        return redirect('login')
 
     return render(request,'SignUp/signup.html')
 
