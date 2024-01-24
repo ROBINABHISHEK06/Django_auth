@@ -15,4 +15,4 @@ python3.9 manage.py migrate --noinput
 # Collect staticfiles
 echo "Collect static..."
 python3.9 manage.py collectstatic --noinput --clear
-echo "BUILD END"
+echo "Build process completed!"
